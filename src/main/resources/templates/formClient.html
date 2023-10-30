@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Client</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container1 {
+        background-color: gainsboro;
+        border: 1px solid #000;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin-top: 20px;
+    }
+    h2 {
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
+<body>
+<div layout:fragment="content1">
+    <div class="container mt-4">
+        <h2>Créer un Nouveau Client</h2>
+        <form th:action="@{/admin/clients}" th:object="${client}" method="post">
+            <div class="container1">
+                <div class="form-group">
+                    <label for="cpk">CPK:</label>
+                    <input type="text" class="form-control" id="cpk" th:field="*{cpk}" required>
+                </div>
+                <div class="form-group">
+                    <label for="libelleClient">Libellé du Client :</label>
+                    <input type="text" class="form-control" id="libelleClient" th:field="*{libelleClient}" required>
+                </div>
+                <div class="form-group">
+                    <label for="caractereFin">Caractère de Fin :</label>
+                    <input type="text" class="form-control" id="caractereFin" th:field="*{carctereFin}" required>
+                </div>
+                <div class="form-group">
+                    <label for="numDebut">Numéro de Début :</label>
+                    <input type="text" class="form-control" id="numDebut" th:field="*{numDebut}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

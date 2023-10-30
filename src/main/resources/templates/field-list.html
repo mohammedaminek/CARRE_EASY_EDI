@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Field List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="display-4">Mapping List</h1>
+
+    <form th:action="@{/admin/process-names}" method="post" class="mt-4"> <!-- Define the POST action -->
+        <input type="hidden" name="clientKey" th:value="${clientKey}" />
+        <div th:each="map : ${modelClient}" class="mb-3">
+            <div th:each="entry : ${map}" class="row">
+                <!-- Access the key and value of each map entry -->
+                <div class="col-6">
+                    <input type="text" th:value="${entry.value}" th:name="${entry.value}" class="form-control" disabled />
+                </div>
+                <!-- Dropdown with a list of names -->
+                <div class="col-6">
+                    <select th:id="${entry.key}" name="selectedNames" class="form-select">
+                        <option th:each="name : ${namesList}" th:text="${name}" />
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br/>
+
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+</div>
+</body>
+</html>

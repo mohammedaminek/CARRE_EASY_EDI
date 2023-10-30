@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Page</title>
+
+  <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .parent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      z-index: -2;
+    }
+
+    .admin-background {
+      background: url(http://www.carre.ma/img/slider/26.jpg) no-repeat center center;
+      background-size: cover;    }
+
+    .user-background {
+      background: url(http://www.carre.ma/img/slider/21.jpg) no-repeat center center;
+    }
+    .container {
+      padding: 60px 150px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.7);
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+    .btn-seconday {
+      background-color: #007bff;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+  </style>
+</head>
+<body>
+<div layout:fragment="content1">
+  <div class="parent" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')} ? 'admin-background' : 'user-background'">
+  </div>
+  <div class="container">
+    <header class="text-center">
+      <h1>Bienvenue sur Notre Site Web</h1>
+      <p th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Cliquez pour Commencer le parammetrage De vos Clients.</p>
+      <p th:if="${#authorization.expression('hasRole(''USER'')')}">Cliquez pour intégrer vos commandes.</p>
+    </header>
+
+    <div class=" mt-4">
+      <a th:href="@{/user/upload-form}" class="btn btn-success btn-lg m-3" th:if="${#authorization.expression('hasRole(''USER'')')}">Commencer</a>
+    </div>
+    <div class=" mt-4">
+      <a th:href="@{/admin/formClient}" class="btn btn-secondary btn-lg m-3" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Creer Un Nouveau Client </a>
+    </div>
+
+  </div>
+
+</div>
+</body>
+
+</html>
